@@ -5,13 +5,13 @@ resource "aws_instance" "instance1" {
   vpc_security_group_ids      = [aws_security_group.ssh-sg-vpc.id, aws_security_group.http-sg-vpc.id]
   key_name                    = "bastion-key2"
   associate_public_ip_address = true
-  user_data                   = <<EOF
+  user_data                   = <<-EOF
     #!/bin/bash
     yum install httpd -y 
     service httpd start 
     chkconfig httpd on 
     echo "Hello, world" > /var/www/html/index.html 
-  EOF
+    EOF
 
   tags = var.tags
 
@@ -25,13 +25,13 @@ resource "aws_instance" "instance2" {
   key_name                    = "bastion-key2"
   associate_public_ip_address = true
 
-  user_data = <<EOF
+  user_data = <<-EOF
     #!/bin/bash
     yum install httpd -y 
     service httpd start 
     chkconfig httpd on 
     echo "Hello, world" > /var/www/html/index.html 
-  EOF
+    EOF
 
   tags = var.tags
 
@@ -47,13 +47,13 @@ resource "aws_instance" "instance3" {
   vpc_security_group_ids = [aws_security_group.ssh-sg-vpc.id, aws_security_group.http-sg-vpc.id]
 
 
-  user_data = <<EOF
+  user_data = <<-EOF
     #!/bin/bash
     yum install httpd -y 
     service httpd start 
     chkconfig httpd on 
     echo "Hello, world" > /var/www/html/index.html 
-  EOF
+    EOF
 
   tags = var.tags
 
